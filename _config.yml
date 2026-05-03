@@ -1,0 +1,41 @@
+# Site
+title: VIPEN ONLINE
+subtitle: '探索先锋设计与创意世界'
+description: '个人博客 - 分享设计、创意与技术的故事'
+author: VIPEN
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+url: https://www.vipenonline.com
+root: /
+permalink: :year/:month/:day/:title/
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+
+highlight:
+  enable: true
+  line_number: true
+
+# Extensions
+theme: butterfly
+
+# Deployment
+deploy:
+  type: git
+  repo: https://github.com/jahyuofficial-debug/vipenonline-blog.git
+  branch: master

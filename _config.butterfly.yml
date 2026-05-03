@@ -1,0 +1,59 @@
+# Butterfly Theme Configuration
+# 先锋风格配置
+
+# Avatar
+avatar:
+  url: /img/avatar.jpg
+  rounded: true
+
+# Menu
+menu:
+  Home: /
+  Archives: /archives/
+  Tags: /tags/
+  Categories: /categories/
+  About: /about/
+
+# Social
+social:
+  GitHub: https://github.com/jahyuofficial-debug
+  Email: mailto:hello@vipenonline.com
+
+# Dark Mode
+darkmode: true
+
+# Post Meta
+post_meta:
+  date_format: YYYY-MM-DD
+
+# Footer
+footer:
+  since: 2024
+
+# Search
+search:
+  enable: true
+  field: post
+
+# Reading Progress
+reading_progress:
+  enable: true
+
+# Word Count
+wordcount:
+  enable: true
+
+# Lazyload
+lazyload:
+  enable: true
+
+# Share
+sharejs:
+  enable: true
+
+# Comments
+comments:
+  enable: true
+  type: disqus
+  disqus:
+    shortname: vipenonline
