@@ -39,3 +39,14 @@ deploy:
   type: git
   repo: https://github.com/jahyuofficial-debug/vipenonline-blog.git
   branch: master
+
+skip_render:
+  - index.html
+  - style.css
+  - main.js
+  - img/**
+  - videos/**
+  - mine/**
+  - life/**
+  - chat/**
+  - more/**

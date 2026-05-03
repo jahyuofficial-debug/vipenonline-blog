@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIPEN ONLINE - Home</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="passcode-overlay">
+    <div class="passcode-box pixel-border">
+      <div class="passcode-title">VIPEN ONLINE</div>
+      <div class="passcode-subtitle">Enter Passcode to Continue</div>
+      <input type="password" id="passcode-input" class="passcode-input" placeholder="····" autocomplete="off">
+      <br>
+      <button id="passcode-submit" class="passcode-submit">ENTER</button>
+      <div id="passcode-error" class="passcode-error">Invalid Passcode</div>
+    </div>
+  </div>
+
+  <div id="main-app">
+    <nav>
+      <div class="nav-logo">VP</div>
+      <div class="nav-links">
+        <a class="nav-link active" href="/">Home</a>
+        <a class="nav-link" href="/mine/">Mine</a>
+        <a class="nav-link" href="/life/">Life</a>
+        <a class="nav-link" href="/chat/">Chat</a>
+        <a class="nav-link" href="/more/">More</a>
+      </div>
+      <button class="theme-toggle" id="theme-toggle">☀/☾</button>
+    </nav>
+
+    <div class="container">
+      <div class="hero">
+        <h1 class="hero-title" id="typed-title"></h1>
+        <p class="hero-subtitle">Design · Creative · Technology<span class="hero-cursor"></span></p>
+        <div style="margin-top: 32px;">
+          <a class="btn" href="/mine/">EXPLORE</a>
+          <a class="btn btn-outline" href="/life/" style="margin-left: 16px;">GALLERY</a>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">FEATURES</h2>
+        <div class="cards-grid">
+          <div class="card pixel-border">
+            <span class="card-icon">🎨</span>
+            <h3 class="card-title">DESIGN</h3>
+            <p class="card-desc">先锋视觉设计，探索美学边界</p>
+          </div>
+          <div class="card pixel-border">
+            <span class="card-icon">💻</span>
+            <h3 class="card-title">TECH</h3>
+            <p class="card-desc">用代码构建创意世界</p>
+          </div>
+          <div class="card pixel-border">
+            <span class="card-icon">✨</span>
+            <h3 class="card-title">CREATIVE</h3>
+            <p class="card-desc">记录灵感与创意旅程</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/main.js"></script>
+</body>
+</html>

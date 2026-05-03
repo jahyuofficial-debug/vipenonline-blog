@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIPEN ONLINE - More</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="passcode-overlay">
+    <div class="passcode-box pixel-border">
+      <div class="passcode-title">VIPEN ONLINE</div>
+      <div class="passcode-subtitle">Enter Passcode to Continue</div>
+      <input type="password" id="passcode-input" class="passcode-input" placeholder="····" autocomplete="off">
+      <br>
+      <button id="passcode-submit" class="passcode-submit">ENTER</button>
+      <div id="passcode-error" class="passcode-error">Invalid Passcode</div>
+    </div>
+  </div>
+
+  <div id="main-app">
+    <nav>
+      <a class="nav-logo" href="/">VP</a>
+      <div class="nav-links">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/mine/">Mine</a>
+        <a class="nav-link" href="/life/">Life</a>
+        <a class="nav-link" href="/chat/">Chat</a>
+        <a class="nav-link active" href="/more/">More</a>
+      </div>
+      <button class="theme-toggle" id="theme-toggle">☀/☾</button>
+    </nav>
+
+    <div class="container page">
+      <div class="section">
+        <h2 class="section-title">MORE</h2>
+        <ul class="more-list">
+          <a class="more-item pixel-border" href="#">
+            <span class="more-item-label">
+              <span class="more-item-icon">📧</span>
+              <span>Contact</span>
+            </span>
+            <span class="more-item-arrow">›</span>
+          </a>
+          <a class="more-item pixel-border" href="#">
+            <span class="more-item-label">
+              <span class="more-item-icon">🔗</span>
+              <span>Links</span>
+            </span>
+            <span class="more-item-arrow">›</span>
+          </a>
+          <a class="more-item pixel-border" href="#">
+            <span class="more-item-label">
+              <span class="more-item-icon">📝</span>
+              <span>Blog</span>
+            </span>
+            <span class="more-item-arrow">›</span>
+          </a>
+          <a class="more-item pixel-border" href="#">
+            <span class="more-item-label">
+              <span class="more-item-icon">⚙</span>
+              <span>Settings</span>
+            </span>
+            <span class="more-item-arrow">›</span>
+          </a>
+          <a class="more-item pixel-border" href="#">
+            <span class="more-item-label">
+              <span class="more-item-icon">❓</span>
+              <span>Help</span>
+            </span>
+            <span class="more-item-arrow">›</span>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="/main.js"></script>
+</body>
+</html>
