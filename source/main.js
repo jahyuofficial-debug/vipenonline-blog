@@ -1,106 +1,75 @@
 // ===== Passcode System =====
-const PASSCODE = ''; // Empty = open access
-
-document.getElementById('passcode-input').addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') submitPasscode();
-});
-
-document.getElementById('passcode-submit').addEventListener('click', submitPasscode);
+const PASSCODE = '';
 
 function submitPasscode() {
-  const input = document.getElementById('passcode-input').value;
-  if (PASSCODE === '' || input === PASSCODE) {
+  const input = document.getElementById('passcode-input');
+  if (!input) return;
+  const value = input.value;
+  if (PASSCODE === '' || value === PASSCODE) {
     document.getElementById('passcode-overlay').classList.add('hidden');
-    document.getElementById('main-app').classList.add('active');
-    startTypingEffect();
-    createParticles();
-    animateOnScroll();
+    document.getElementById('main-app').style.display = 'block';
+    document.getElementById('main-app').style.opacity = '1';
+    document.getElementById('main-app').style.transform = 'translateY(0)';
+    initScrollAnimations();
   } else {
-    const error = document.getElementById('passcode-error');
-    error.style.display = 'block';
-    document.getElementById('passcode-input').style.borderColor = '#ff4444';
+    const err = document.getElementById('passcode-error');
+    err.style.display = 'block';
+    input.style.borderColor = '#ff4466';
+    input.style.boxShadow = '0 0 30px rgba(255,68,102,0.3)';
     setTimeout(() => {
-      error.style.display = 'none';
-      document.getElementById('passcode-input').style.borderColor = '';
+      err.style.display = 'none';
+      input.style.borderColor = '';
+      input.style.boxShadow = '';
     }, 2000);
   }
 }
 
-// ===== Typing Effect =====
-function startTypingEffect() {
-  const el = document.getElementById('typed-title');
-  if (!el) return;
-  const title = 'VIPEN ONLINE';
-  let i = 0;
-  const interval = setInterval(() => {
-    if (i < title.length) {
-      el.textContent += title[i];
-      i++;
-    } else {
-      clearInterval(interval);
-    }
-  }, 120);
-}
-
-// ===== Floating Particles =====
-function createParticles() {
-  if (document.querySelectorAll('.particle').length > 0) return;
-  const count = 15;
-  for (let i = 0; i < count; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDuration = (8 + Math.random() * 12) + 's';
-    particle.style.animationDelay = Math.random() * 10 + 's';
-    const size = (2 + Math.random() * 4) + 'px';
-    particle.style.width = size;
-    particle.style.height = size;
-    document.body.appendChild(particle);
-  }
-}
-
-// ===== Scroll Animations =====
-function animateOnScroll() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.card, .gallery-item, .stat-card, .video-container').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    observer.observe(el);
+const passcodeInput = document.getElementById('passcode-input');
+if (passcodeInput) {
+  passcodeInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') submitPasscode();
   });
 }
 
+const passcodeBtn = document.getElementById('passcode-btn');
+if (passcodeBtn) {
+  passcodeBtn.addEventListener('click', submitPasscode);
+}
+
+// Focus
+if (passcodeInput) passcodeInput.focus();
+
 // ===== Theme Toggle =====
-let isDark = localStorage.getItem('theme') !== 'light';
+let isDark = localStorage.getItem('vp-theme') !== 'light';
+
 function applyTheme() {
-  if (!isDark) {
-    document.body.classList.add('light-theme');
-  } else {
-    document.body.classList.remove('light-theme');
-  }
+  document.body.classList.toggle('light-theme', !isDark);
 }
 
 applyTheme();
 
-document.getElementById('theme-toggle').addEventListener('click', function() {
-  isDark = !isDark;
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  applyTheme();
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.theme-toggle')) {
+    isDark = !isDark;
+    localStorage.setItem('vp-theme', isDark ? 'dark' : 'light');
+    applyTheme();
+  }
 });
 
-// ===== Focus passcode on load =====
-document.getElementById('passcode-input').focus();
+// ===== Scroll Animations =====
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-// ===== Init on page load =====
-document.addEventListener('DOMContentLoaded', function() {
-  createParticles();
-  animateOnScroll();
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// ===== Init =====
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollAnimations();
 });

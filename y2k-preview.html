@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIPEN ONLINE - Y2K Style Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== Y2K GRADIENT BACKGROUND ===== */
+    .bg-gradient {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(255,0,128,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(0,200,255,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(120,0,255,0.2) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0a0a 0%, #1a0a2e 100%);
+      z-index: -1;
+    }
+
+    /* ===== CHROME/METALLIC EFFECT ===== */
+    .chrome-text {
+      background: linear-gradient(180deg, #fff 0%, #c0c0c0 30%, #fff 50%, #808080 70%, #c0c0c0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    .chrome-border {
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+
+    .chrome-border::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, #fff, #c0c0c0, #fff, #808080);
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    /* ===== HEADER / NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #ff0080, #7928ca, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff0080, #00d4ff);
+    }
+
+    .theme-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-btn:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: #ff0080;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 40px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(255,0,128,0.2);
+      border: 1px solid rgba(255,0,128,0.4);
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #ff0080;
+      margin-bottom: 30px;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #ff0080, #7928ca, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 16px 40px;
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 40px rgba(255,0,128,0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 50px rgba(255,0,128,0.5);
+    }
+
+    .btn-secondary {
+      padding: 16px 40px;
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      border-color: #00d4ff;
+      color: #00d4ff;
+      box-shadow: 0 0 30px rgba(0,212,255,0.3);
+    }
+
+    /* ===== FLOATING ELEMENTS ===== */
+    .floating-shapes {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .shape-1 {
+      width: 400px; height: 400px;
+      background: #ff0080;
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+
+    .shape-2 {
+      width: 300px; height: 300px;
+      background: #00d4ff;
+      bottom: -50px; right: -50px;
+      animation-delay: -5s;
+    }
+
+    .shape-3 {
+      width: 200px; height: 200px;
+      background: #7928ca;
+      top: 50%; left: 50%;
+      animation-delay: -10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -50px) scale(1.1); }
+      50% { transform: translate(-30px, 30px) scale(0.9); }
+      75% { transform: translate(20px, 50px) scale(1.05); }
+    }
+
+    /* ===== SECTION STYLES ===== */
+    .section {
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #ff0080;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+    }
+
+    /* ===== CARDS ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff0080, #7928ca, #00d4ff);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,0,128,0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,0,128,0.3), rgba(121,40,202,0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+
+    /* ===== STATS SECTION ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 32px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+    }
+
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ff0080, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item:hover {
+      border-color: #ff0080;
+      transform: scale(1.05);
+    }
+
+    .gallery-item::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* ===== VIDEO SECTION ===== */
+    .video-container {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a0a2e, #0a0a0a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .video-placeholder:hover {
+      background: linear-gradient(135deg, #2a1a4e, #1a0a2e);
+    }
+
+    .video-info {
+      padding: 20px;
+    }
+
+    .video-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* ===== CHAT / MESSAGE BOARD ===== */
+    .chat-container {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .chat-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .chat-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .chat-desc {
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+    }
+
+    /* ===== MORE PAGE ===== */
+    .more-list {
+      list-style: none;
+    }
+
+    .more-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .more-item:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,0,128,0.3);
+      transform: translateX(8px);
+    }
+
+    .more-item-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .more-item-icon {
+      font-size: 24px;
+    }
+
+    .more-item-text {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .more-item-arrow {
+      color: rgba(255,255,255,0.3);
+      font-size: 20px;
+    }
+
+    /* ===== PASSCODE OVERLAY ===== */
+    .passcode-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+
+    .passcode-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .passcode-box {
+      text-align: center;
+      padding: 48px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .passcode-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ff0080, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .passcode-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+    }
+
+    .passcode-input {
+      width: 100%;
+      padding: 16px 24px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      text-align: center;
+      letter-spacing: 8px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .passcode-input:focus {
+      border-color: #ff0080;
+      box-shadow: 0 0 30px rgba(255,0,128,0.3);
+    }
+
+    .passcode-btn {
+      width: 100%;
+      padding: 16px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff0080, #7928ca);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .passcode-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255,0,128,0.4);
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,0,128,0.5);
+      border-radius: 3px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      .nav-link { font-size: 11px; letter-spacing: 1px; }
+      .hero-title { font-size: 40px; }
+      .hero-subtitle { font-size: 16px; }
+      .section { padding: 60px 20px; }
+      .section-title { font-size: 28px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .logo { font-size: 18px; }
+    }
+
+    /* ===== Y2K MARQUEE ===== */
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 12px 0;
+      background: linear-gradient(90deg, #ff0080, #7928ca, #00d4ff);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ===== Y2K STICKER EFFECT ===== */
+    .sticker {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #ff0080;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+      box-shadow: 3px 3px 0 #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+
+  <!-- Passcode Overlay -->
+  <div class="passcode-overlay" id="passcode-overlay">
+    <div class="passcode-box">
+      <div class="passcode-title">VIPEN ONLINE</div>
+      <div class="passcode-subtitle">Enter Access Code</div>
+      <input type="password" class="passcode-input" id="passcode-input" placeholder="····" autocomplete="off">
+      <button class="passcode-btn" id="passcode-btn">ENTER</button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">VP</div>
+    <div class="nav-links">
+      <a class="nav-link active" href="#">Home</a>
+      <a class="nav-link" href="#">Mine</a>
+      <a class="nav-link" href="#">Life</a>
+      <a class="nav-link" href="#">Chat</a>
+      <a class="nav-link" href="#">More</a>
+    </div>
+    <button class="theme-btn">☀/☾</button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ Y2K AESTHETIC ✦</div>
+      <h1 class="hero-title">
+        <span>VIPEN</span><br>ONLINE
+      </h1>
+      <p class="hero-subtitle">Design · Creative · Street Culture</p>
+      <div class="hero-buttons">
+        <button class="btn-primary">EXPLORE</button>
+        <button class="btn-secondary">GALLERY</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">
+      ★ DESIGN IS NOT DEAD ★ FASHION IS FOREVER ★ STREET CULTURE ★ Y2K VIBES ★ PIXEL DREAMS ★ DIGITAL FASHION ★ FUTURE NOSTALGIA ★ 
+      ★ DESIGN IS NOT DEAD ★ FASHION IS FOREVER ★ STREET CULTURE ★ Y2K VIBES ★ PIXEL DREAMS ★ DIGITAL FASHION ★ FUTURE NOSTALGIA ★
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">FEATURES</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3 class="card-title">DESIGN</h3>
+        <p class="card-desc">先锋视觉设计，融合Y2K美学与街头潮流文化</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3 class="card-title">TECH</h3>
+        <p class="card-desc">用代码构建数字世界，探索科技与艺术的边界</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✨</div>
+        <h3 class="card-title">CREATIVE</h3>
+        <p class="card-desc">记录灵感瞬间，捕捉每一个创意火花</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">About</div>
+      <h2 class="section-title">STATS</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">42</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">128</div>
+        <div class="stat-label">Posts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1.2K</div>
+        <div class="stat-label">Likes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">365</div>
+        <div class="stat-label">Days</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Life</div>
+      <h2 class="section-title">GALLERY</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-label="Mountain">️</div>
+      <div class="gallery-item" data-label="Ocean">🌊</div>
+      <div class="gallery-item" data-label="Sunset">🌅</div>
+      <div class="gallery-item" data-label="City">🏙️</div>
+      <div class="gallery-item" data-label="Music">🎵</div>
+      <div class="gallery-item" data-label="Photo">📷</div>
+    </div>
+  </section>
+
+  <!-- Videos Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Watch</div>
+      <h2 class="section-title">VIDEOS</h2>
+    </div>
+    <div class="video-container">
+      <div class="video-placeholder">▶</div>
+      <div class="video-info">
+        <div class="video-title">Featured Video</div>
+      </div>
+    </div>
+    <div class="video-container">
+      <div class="video-placeholder">▶</div>
+      <div class="video-info">
+        <div class="video-title">Design Process</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chat Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Community</div>
+      <h2 class="section-title">MESSAGE BOARD</h2>
+    </div>
+    <div class="chat-container">
+      <div class="chat-icon">💬</div>
+      <div class="chat-title">Coming Soon</div>
+      <div class="chat-desc">Text · Image · Emoji</div>
+    </div>
+  </section>
+
+  <!-- More Section -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Explore</div>
+      <h2 class="section-title">MORE</h2>
+    </div>
+    <ul class="more-list">
+      <li class="more-item">
+        <div class="more-item-left">
+          <span class="more-item-icon">📧</span>
+          <span class="more-item-text">Contact</span>
+        </div>
+        <span class="more-item-arrow">›</span>
+      </li>
+      <li class="more-item">
+        <div class="more-item-left">
+          <span class="more-item-icon">🔗</span>
+          <span class="more-item-text">Links</span>
+        </div>
+        <span class="more-item-arrow">›</span>
+      </li>
+      <li class="more-item">
+        <div class="more-item-left">
+          <span class="more-item-icon">📝</span>
+          <span class="more-item-text">Blog</span>
+        </div>
+        <span class="more-item-arrow">›</span>
+      </li>
+      <li class="more-item">
+        <div class="more-item-left">
+          <span class="more-item-icon">⚙</span>
+          <span class="more-item-text">Settings</span>
+        </div>
+        <span class="more-item-arrow">›</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+    <div style="font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 4px; margin-bottom: 8px;">
+      VIPEN ONLINE
+    </div>
+    <div style="font-size: 12px; color: rgba(255,255,255,0.4);">
+      © 2024 All Rights Reserved
+    </div>
+  </footer>
+
+  <script>
+    // Passcode
+    const PASSCODE = '';
+    document.getElementById('passcode-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitPasscode();
+    });
+    document.getElementById('passcode-btn').addEventListener('click', submitPasscode);
+
+    function submitPasscode() {
+      const input = document.getElementById('passcode-input').value;
+      if (PASSCODE === '' || input === PASSCODE) {
+        document.getElementById('passcode-overlay').classList.add('hidden');
+      }
+    }
+
+    document.getElementById('passcode-input').focus();
+
+    // Nav link active state
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
