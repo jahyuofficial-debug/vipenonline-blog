@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "hexo server",
-    "build": "hexo generate",
+    "build": "hexo generate && node scripts/copy-disc.js",
     "deploy": "hexo deploy",
     "clean": "hexo clean"
   },
