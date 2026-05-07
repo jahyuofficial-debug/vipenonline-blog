@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const discSrc = path.join(__dirname, '..', 'vipenonline-disc', 'dist');
-const discDest = path.join(__dirname, '..', 'public', 'disc');
+const projectRoot = path.resolve(__dirname, '..');
+const discSrc = path.join(projectRoot, 'vipenonline-disc', 'dist');
+const discDest = path.join(projectRoot, 'public', 'disc');
 
 if (fs.existsSync(discSrc)) {
   function copyRecursive(src, dest) {
